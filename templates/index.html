@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>htmx-download</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Pico CSS -->
+    <link rel="stylesheet"
+          href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    <script src="https://unpkg.com/htmx.org"></script>
+    <script src="static/htmx-download.js"></script>
+    <style>
+      {{ pygments_css|safe }}
+
+      .demo-header {
+        text-align: center;
+        padding: 2rem 0;
+      }
+
+      .download-section {
+        margin-top: 2rem;
+        text-align: center;
+      }
+      section {
+        margin-top: 4rem;
+      }
+
+      h3 {
+        margin-bottom: 2rem;
+      }
+
+      .my-indicator {
+        visibility: hidden;
+        height: 0;
+        scale: 0;
+        margin-left: 0;
+        transition: all 0.5s;
+          
+      }
+      
+      .htmx-request.my-indicator {
+        height: 1.5rem;
+        visibility: visible;
+        scale: 1;
+        margin-left: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <article>
+        <header class="demo-header">
+          <h1>HTMX Download Extension Demo</h1>
+          <p>
+            Extension for downloading files using HTMX and leveraging the <code>hx-indicator</code> attribute.
+          </p>
+        </header>
+        <section class="download-section">
+          <h2>File Download Example</h2>
+          <p>Click the button below to download a file:</p>
+          <button hx-get="{{ url_for('file_download') }}"
+                  hx-ext="htmx-download"
+                  hx-indicator="#spinner"
+                  >
+            Download File
+            <img src="static/indicator.svg" id="spinner" class="my-indicator">
+          </button>
+        </section>
+        <section>
+          <h3>Frontend Code (HTMX)</h3>
+          {{ highlighted_frontend_code | safe }}
+        </section>
+        <section>
+          <h3>Backend Code (Flask)</h3>
+          {{ highlighted_backend_code | safe }}
+        </section>
+      </article>
+    </main>
+    <footer class="container">
+      <small>&copy; 2024 HTMX Download Demo | Created by <a href="https://x.com/Dakixr">@dakixr</a></small>
+    </footer>
+  </body>
+</html>
